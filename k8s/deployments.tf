@@ -1,3 +1,43 @@
+resource "kubernetes_deployment" "webapi" {
+  metadata {
+    name = "webapi"
+    labels = {
+      app = "webapi"
+      tier = "backend"
+    }
+  }
+
+  spec {
+    replicas = 3
+
+    selector {
+      match_labels = {
+        app = "webapi"
+      }
+    }
+
+    template {
+      metadata {
+        labels = {
+          app = "webapi"
+          tier = "backend"
+        }
+      }
+
+      spec {
+        container {
+          image = "gcr.io/truble-shakespeare-gke/server"
+          name = "webapi"
+
+          port {
+            container_port = 8080
+          }
+        }
+      }
+    }
+  }
+}
+
 resource "kubernetes_deployment" "redis-master" {
   metadata {
     name = "redis-master"
