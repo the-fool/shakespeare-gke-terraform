@@ -1,3 +1,23 @@
+resource "kubernetes_service" "webapi" {
+  metadata {
+    name = "webapi"
+  }
+
+  spec {
+    selector = {
+      app = "webapi"
+      tier = "backend"
+    }
+    port {
+      port = 8080
+      target_port = 8080
+    }
+    type = "LoadBalancer"
+  }
+
+
+}
+
 resource "kubernetes_service" "redis-master" {
   metadata {
     name = "redis-master"
