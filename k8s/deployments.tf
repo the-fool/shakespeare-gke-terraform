@@ -26,7 +26,7 @@ resource "kubernetes_deployment" "webapi" {
 
       spec {
         container {
-          image = "gcr.io/truble-shakespeare-gke/server"
+          image = "gcr.io/truble-shakespeare-gke/server:latest"
           name = "webapi"
 
           port {
